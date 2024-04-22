@@ -1,3 +1,44 @@
+## 5.6.0
+
+### Changes
+* Update elastalert2 to v2.17.0 #91
+* Update npm packages
+
+## 5.5.0
+
+### Changes
+* Update elastalert2 to v2.16.0 #90
+* Update npm packages
+
+## 5.4.0
+
+### Changes
+* Remove redundant packages from docker image #85
+* Updata .nvmrc #87
+* Update build image to alpine:3.19 #88
+* Update main image to node:18.19-alpine3.19 #88
+* Update npm packages
+
+## 5.3.0
+
+### Changes
+* Update elastalert2 to v2.15.0 #86
+* Update npm packages
+
+## 5.2.0
+
+### Changes
+* Update elastalert2 to v2.14.0 #84
+
+## 5.1.0
+
+### Changes
+* Update elastalert2 to v2.13.2 #81
+* Update build image to alpine:3.18
+* Update main image to node:18.18-alpine3.18 (node18 && python3.11) #83
+* Update npm packages
+* Improve building elastalert2 process
+
 ## 5.0.0
 
 It's time to finally release a stable version 😊

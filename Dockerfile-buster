@@ -1,6 +1,6 @@
-FROM python:3-slim-buster as build-elastalert
+FROM python:3.19-slim-buster as build-elastalert
 
-ARG ELASTALERT_VERSION=2.2.2
+ARG ELASTALERT_VERSION=2.17.0
 ENV ELASTALERT_VERSION=${ELASTALERT_VERSION}
 # URL from which to download ElastAlert 2.
 ARG ELASTALERT_URL=https://github.com/jertel/elastalert2/archive/refs/tags/$ELASTALERT_VERSION.zip
@@ -26,7 +26,7 @@ WORKDIR "${ELASTALERT_HOME}"
 RUN pip install setuptools wheel && \
     python setup.py sdist bdist_wheel
 
-FROM node:18-buster-slim as build-server
+FROM node:18.19-buster-slim as build-server
 COPY package*.json ./
 RUN npm ci
 
@@ -38,7 +38,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM python:3-slim-buster
+FROM python:3.19-slim-buster
 
 LABEL description="ElastAlert2 Server (arm64)"
 LABEL maintainer="Jose Gutierrez <jagj77@gmail.com>"
