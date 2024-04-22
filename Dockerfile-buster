@@ -73,7 +73,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
 
 COPY package*.json ./
 RUN npm install -g npm
-RUN npm ci --production
+RUN npm install --production
 
 COPY --from=build-server /opt/elastalert-server/dist /opt/elastalert-server/dist
 COPY scripts scripts
