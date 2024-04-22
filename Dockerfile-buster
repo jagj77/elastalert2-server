@@ -28,6 +28,7 @@ RUN pip install setuptools wheel && \
 
 FROM node:18-buster-slim as build-server
 COPY package*.json ./
+RUN npm install -g npm
 RUN npm install
 
 WORKDIR /opt/elastalert-server
