@@ -20,6 +20,7 @@ es_host: ${ES_HOST}
 # The Elasticsearch port
 es_port: ${ES_PORT}
 
+skip_invalid: True
 # The AWS region to use. Set this when using AWS-managed elasticsearch
 #aws_region: us-east-1
 
