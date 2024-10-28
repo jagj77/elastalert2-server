@@ -7,6 +7,9 @@ ENV ELASTALERT_URL=${ELASTALERT_URL}
 # ElastAlert 2 home directory full path
 ENV ELASTALERT_HOME /opt/elastalert
 
+#ARG GROUPNAME=elastalert2-server
+ARG USERNAME=node
+
 WORKDIR /opt
 
 RUN apk add --update --no-cache \
@@ -61,7 +64,8 @@ COPY --from=build-server /opt/elastalert-server/dist /opt/elastalert-server/dist
 WORKDIR /opt/elastalert-server
 
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install -g npm
+RUN npm install --production
 
 COPY scripts scripts
 
@@ -76,7 +80,7 @@ COPY elastalert_modules/ /opt/elastalert/elastalert_modules
 RUN mkdir -p /opt/elastalert/rules/ /opt/elastalert/server_data/tests/ \
     && chown -R node:node /opt
 
-USER node
+USER ${USERNAME}
 
 EXPOSE 3030
 ENTRYPOINT ["npm", "start"]
