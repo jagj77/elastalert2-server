@@ -1,3 +1,9 @@
+## 5.9.0
+
+### Changes
+* Add possibility to expose metrics for prometheus #95
+* Update npm packages
+
 ## 5.8.0
 
 ### Changes
