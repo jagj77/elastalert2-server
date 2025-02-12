@@ -1,5 +1,5 @@
 FROM alpine:3.20 as build-elastalert
-ARG ELASTALERT_VERSION=2.20.0
+ARG ELASTALERT_VERSION=2.21.0
 ENV ELASTALERT_VERSION=${ELASTALERT_VERSION}
 # URL from which to download ElastAlert 2
 ARG ELASTALERT_URL=https://github.com/jertel/elastalert2/archive/refs/tags/$ELASTALERT_VERSION.zip
@@ -26,6 +26,9 @@ RUN apk add --update --no-cache \
 
 WORKDIR "${ELASTALERT_HOME}"
 
+# Temp fix before new alpine release
+RUN sed -i "s/python_requires='>=3.13'/python_requires='>=3.12'/" setup.py
+
 # Building ElastAlert 2
 RUN python3 setup.py sdist bdist_wheel
 
@@ -35,7 +38,7 @@ RUN python3 -m venv /opt/elastalert2-venv && \
     pip3 install dist/*.tar.gz && \
     deactivate
 
-FROM node:22.10-alpine3.20 as build-server
+FROM node:22.11-alpine3.20 as build-server
 
 WORKDIR /opt/elastalert-server
 
@@ -45,7 +48,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:22.10-alpine3.20
+FROM node:22.11-alpine3.20
 
 LABEL description="ElastAlert2 Server ARM64v8"
 LABEL maintainer="Karql <jagj77@hotmail.com>"
@@ -67,8 +70,6 @@ COPY package*.json ./
 RUN npm install -g npm
 RUN npm install --production
 
-COPY scripts scripts
-
 COPY config/elastalert.yaml /opt/elastalert/config.yaml
 COPY config/elastalert-test.yaml /opt/elastalert/config-test.yaml
 COPY config/config.json config/config.json
@@ -83,4 +84,4 @@ RUN mkdir -p /opt/elastalert/rules/ /opt/elastalert/server_data/tests/ \
 USER ${USERNAME}
 
 EXPOSE 3030
-ENTRYPOINT ["npm", "start"]
+CMD ["node", "dist/index.js"]
