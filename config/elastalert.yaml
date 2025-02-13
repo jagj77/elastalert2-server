@@ -83,6 +83,10 @@ alert_time_limit:
 # the configuration below and adjust to your needs.
 # Note: if you run ElastAlert with --verbose/--debug, the log level of
 # the "elastalert" logger is changed to INFO, if not already INFO/DEBUG.
+
+max_query_size: 1000
+max_scrolling_count: 100
+
 logging:
   version: 1
   incremental: false
