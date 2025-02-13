@@ -1,6 +1,6 @@
 FROM python:3-slim AS build-elastalert
 
-ARG ELASTALERT_VERSION=2.20.0
+ARG ELASTALERT_VERSION=2.21.0
 ENV ELASTALERT_VERSION ${ELASTALERT_VERSION}
 # URL from which to download ElastAlert 2.
 ARG ELASTALERT_URL=https://github.com/jertel/elastalert2/archive/refs/tags/${ELASTALERT_VERSION}.zip
@@ -22,6 +22,8 @@ RUN wget -O elastalert.zip "${ELASTALERT_URL}" || { echo "Failed to download Ela
 WORKDIR "${ELASTALERT_HOME}"
 
 # Install ElastAlert 2.
+RUN sed -i "s/python_requires='>=3.13'/python_requires='>=3.12'/" setup.py
+
 RUN pip install setuptools wheel && \
     python setup.py sdist bdist_wheel
 
