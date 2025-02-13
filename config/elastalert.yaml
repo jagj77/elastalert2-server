@@ -108,26 +108,27 @@ logging:
     #      level: DEBUG
     #      filename: elastalert.log
     #
-    #  loggers:
-    elastalert:
-      level: DEBUG
-      handlers:
-        - console
-      propagate: true
-    #
-    #    elasticsearch:
-    #      level: WARN
-    #      handlers: []
-    #      propagate: true
-    #
-    #    elasticsearch.trace:
-    #      level: WARN
-    #      handlers: []
-    #      propagate: true
-    #
-    "": # root logger
-      level: WARN
-      handlers:
-        - console
-      #        - file
-      propagate: false
+    loggers:
+      elastalert:
+        level: DEBUG
+        handlers:
+          - console
+        propagate: true
+
+      elasticsearch:
+        level: WARN
+        handlers:
+          - console
+        propagate: true
+
+      elasticsearch.trace:
+        level: WARN
+        handlers:
+          - console
+        propagate: true
+
+      "": # root logger
+        level: WARN
+        handlers:
+          - console
+        propagate: false
