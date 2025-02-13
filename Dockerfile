@@ -43,7 +43,7 @@ FROM node:22.11-alpine3.20 as build-server
 WORKDIR /opt/elastalert-server
 
 COPY package*.json ./
-RUN npm ci
+RUN npm install -g npm@latest && npm ci
 
 COPY . .
 RUN npm run build
