@@ -110,19 +110,19 @@ logging:
     #
   loggers:
     elastalert:
-      level: DEBUG
+      level: WARN
       handlers:
         - console
       propagate: true
 
     elasticsearch:
-      level: WARN
+      level: INFO
       handlers:
         - console
       propagate: true
 
     elasticsearch.trace:
-      level: WARN
+      level: INFO
       handlers:
         - console
       propagate: true
